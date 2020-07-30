@@ -1,18 +1,7 @@
 #pragma once
 
-#include <switch.h>
-
 #define _STRINGIFY(x) #x
 #define STRINGIFY(x) _STRINGIFY(x)
-#define _CONCATENATE(x1, x2) x1##x2
-#define CONCATENATE(x1, x2) _CONCATENATE(x1, x2)
-
-#define R_FATAL_FAIL(x)                      \
-    ({                                       \
-        if (Result rc = (x); R_FAILED(rc)) { \
-            fatalThrow(rc);                  \
-        }                                    \
-    })
 
 // debug logging
 // #define DEBUG_LOG_FILE

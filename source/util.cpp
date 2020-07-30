@@ -6,32 +6,38 @@ void debugInit() {}
 void debugExit() {}
 
 #else
+
 #include <cstdarg>
 #include <cstdio>
+#include <stratosphere.hpp>
 #include <string>
 
 #ifdef DEBUG_LOG_FILE
+
 FILE* g_debug_file;
+
 extern "C" {
 void __libnx_init_time(void);
 }
+
 #endif
 
 #ifdef DEBUG_NXLINK_FORCED_IP
+
 #include <netinet/in.h>
+
 extern "C" {
 extern struct in_addr __nxlink_host;
 }
+
 #endif
 
 void debugInit() {
-    R_FATAL_FAIL(smInitialize());
-
 #ifdef DEBUG_LOG_FILE
-    R_FATAL_FAIL(timeInitialize());
+    ams::sm::DoWithSession([&]() { R_ABORT_UNLESS(timeInitialize()); });
     __libnx_init_time();
     time_t currentTime;
-    R_FATAL_FAIL(timeGetCurrentTime(TimeType_Default, (u64*)&currentTime));
+    R_ABORT_UNLESS(timeGetCurrentTime(TimeType_Default, (u64*)&currentTime));
     timeExit();
 
     std::string logName = "sdmc:/eiffel" + std::to_string(currentTime) + ".log";  // TODO: better log location
@@ -46,8 +52,6 @@ void debugInit() {
 #ifdef DEBUG_NXLINK
     nxlinkStdio();
 #endif
-
-    smExit();
 }
 
 void debugExit() {
