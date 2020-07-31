@@ -1,5 +1,7 @@
 #pragma once
 
+#include <eiffel.h>
+
 #include <stratosphere.hpp>
 
 namespace efl {
@@ -8,7 +10,7 @@ namespace ipc {
     class Server {
        private:
         static constexpr auto NUM_SERVERS = 1;
-        static constexpr auto EIFFEL_SERVICE_NAME = ams::sm::ServiceName::Encode("efl");
+        static constexpr auto EIFFEL_SERVICE_NAME_ENCODED = ams::sm::ServiceName::Encode(EIFFEL_SERVICE_NAME);
         static constexpr auto EIFFEL_SERVICE_MAX_SESSIONS = 5;
 
         Server();

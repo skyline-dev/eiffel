@@ -5,19 +5,15 @@
 namespace efl {
 namespace logger {
 
-    enum class LogLevel : uint8_t {
-        INFO = 0,
-        WARNING = 1,
-        ERROR = 2,
-    };
+    using LogLevel = EiffelLogLevel;
 
     inline auto GetLogLevelString(LogLevel level) {
         switch (level) {
-            case LogLevel::INFO:
+            case EFL_LOG_LEVEL_INFO:
                 return "INFO";
-            case LogLevel::WARNING:
+            case EFL_LOG_LEVEL_WARNING:
                 return "WARNING";
-            case LogLevel::ERROR:
+            case EFL_LOG_LEVEL_ERROR:
                 return "ERROR";
             default:
                 return "unk";

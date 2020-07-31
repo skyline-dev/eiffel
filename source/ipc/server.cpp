@@ -7,7 +7,7 @@ namespace ipc {
 
     Server::Server() {
         R_ABORT_UNLESS(
-            m_serverManager.RegisterServer<ServiceProvider>(EIFFEL_SERVICE_NAME, EIFFEL_SERVICE_MAX_SESSIONS));
+            m_serverManager.RegisterServer<ServiceProvider>(EIFFEL_SERVICE_NAME_ENCODED, EIFFEL_SERVICE_MAX_SESSIONS));
     }
 
 };  // namespace ipc

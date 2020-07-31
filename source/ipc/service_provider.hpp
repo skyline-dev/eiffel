@@ -1,5 +1,7 @@
 #pragma once
 
+#include <eiffel.h>
+
 #include <stratosphere.hpp>
 
 #include "../logger/types.hpp"
@@ -10,7 +12,7 @@ namespace ipc {
     class ServiceProvider final : public ams::sf::IServiceObject {
        protected:
         enum class CommandId {
-            Log = 0,
+            Log = EFL_CMD_LOG,
         };
 
        public:
