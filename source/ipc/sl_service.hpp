@@ -1,6 +1,6 @@
 #pragma once
 
-#include <eiffel.h>
+#include <eiffel/sl.h>
 
 #include <stratosphere.hpp>
 
@@ -9,15 +9,15 @@
 namespace efl {
 namespace ipc {
 
-    class ServiceProvider final : public ams::sf::IServiceObject {
+    class SlService final : public ams::sf::IServiceObject {
        protected:
         enum class CommandId {
-            Log = EFL_CMD_LOG,
+            Log = EFL_SL_CMD_LOG,
         };
 
        public:
-        explicit ServiceProvider();
-        virtual ~ServiceProvider();
+        explicit SlService();
+        virtual ~SlService();
 
        private:
         ams::Result Log(const ams::sf::InBuffer&, efl::logger::LogLevel, const ams::sf::InBuffer&);
@@ -26,6 +26,8 @@ namespace ipc {
         DEFINE_SERVICE_DISPATCH_TABLE{
             MAKE_SERVICE_COMMAND_META(Log),
         };
+
+        static constexpr auto SERVICE_NAME = ams::sm::ServiceName::Encode(EIFFEL_SKYLINE_SERVICE_NAME);
     };
 
 };  // namespace ipc

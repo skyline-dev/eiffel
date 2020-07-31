@@ -1,5 +1,7 @@
 #pragma once
 
+#include <eiffel/sl.h>
+
 #include <cstdint>
 
 namespace efl {
