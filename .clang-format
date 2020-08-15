@@ -3,4 +3,4 @@ BasedOnStyle:               Google
 ColumnLimit:                119
 IndentWidth:                4
 DerivePointerAlignment:     false
-NamespaceIndentation:       Inner
+NamespaceIndentation:       All

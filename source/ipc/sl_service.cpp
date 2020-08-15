@@ -2,8 +2,7 @@
 
 #include "../util.hpp"
 
-namespace efl {
-namespace ipc {
+namespace efl::ipc {
 
     SlService::SlService() {}
 
@@ -15,5 +14,16 @@ namespace ipc {
         return 0;
     };
 
-};  // namespace ipc
-};  // namespace efl
+    ams::Result SlService::RegisterPlugin(SlPluginMeta meta) {
+        core::PluginHandler::SetPluginMeta(meta);
+        LOG("registered plugin: %s", meta.name);
+        return 0;
+    };
+
+    ams::Result SlService::RegisterSharedMem(core::PluginName name, SharedMemory sharedMem) {
+        core::PluginHandler::SetPluginSharedMem(name, sharedMem);
+        LOG("registered plugin shared mem: %s", name);
+        return 0;
+    };
+
+};  // namespace efl::ipc
