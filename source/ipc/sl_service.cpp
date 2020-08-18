@@ -16,13 +16,14 @@ namespace efl::ipc {
 
     ams::Result SlService::RegisterPlugin(SlPluginMeta meta) {
         core::PluginHandler::SetPluginMeta(meta);
-        LOG("registered plugin: %s", meta.name);
+        LOG("%s", meta.name);
         return 0;
     };
 
-    ams::Result SlService::RegisterSharedMem(core::PluginName name, SharedMemory sharedMem) {
-        core::PluginHandler::SetPluginSharedMem(name, sharedMem);
-        LOG("registered plugin shared mem: %s", name);
+    ams::Result SlService::RegisterSharedMem(core::PluginName name, SlPluginSharedMemInfo sharedMemInfo) {
+        core::PluginHandler::SetPluginSharedMem(name, sharedMemInfo);
+        LOG("%s - handle %d  size 0x%lx  perm: %x", name.data(), sharedMemInfo.handle, sharedMemInfo.size,
+            sharedMemInfo.perm);
         return 0;
     };
 

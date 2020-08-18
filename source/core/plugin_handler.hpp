@@ -3,8 +3,8 @@
 #include <eiffel/sl.h>
 
 #include <stratosphere.hpp>
-#include <string_view>
-#include <unordered_map>
+#include <string>
+#include <map>
 
 namespace efl::core {
 
@@ -20,20 +20,20 @@ namespace efl::core {
             return s_Instance;
         }
 
-        std::unordered_map<std::string_view, SlPluginMeta> m_ActivePluginMetas;
-        std::unordered_map<std::string_view, SharedMemory> m_ActivePluginSharedMems;
+        std::map<std::string, SlPluginMeta> m_ActivePluginMetas;
+        std::map<std::string, SlPluginSharedMemInfo> m_ActivePluginSharedMemInfos;
 
        public:
         static inline void SetPluginMeta(SlPluginMeta& pluginMeta) {
             GetInstance().m_ActivePluginMetas[pluginMeta.name] = pluginMeta;
         }
 
-        static inline void SetPluginSharedMem(PluginName& name, SharedMemory& sharedMem) {
-            GetInstance().m_ActivePluginSharedMems[name.data()] = sharedMem;
+        static inline void SetPluginSharedMem(PluginName& name, SlPluginSharedMemInfo& sharedMemInfo) {
+            GetInstance().m_ActivePluginSharedMemInfos[name.data()] = sharedMemInfo;
         }
 
-        static ams::Result GetPluginMeta(SlPluginMeta* out_pluginMeta, std::string_view name);
-        static ams::Result GetPluginSharedMemInfo(SharedMemory* out_sharedMem, std::string_view name);
+        static ams::Result GetPluginMeta(SlPluginMeta* out_pluginMeta, PluginName& name);
+        static ams::Result GetPluginSharedMemInfo(SlPluginSharedMemInfo* out_sharedMemInfo, PluginName& name);
     };
 
 }  // namespace efl::core

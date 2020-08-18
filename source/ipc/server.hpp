@@ -2,12 +2,11 @@
 
 #include <stratosphere.hpp>
 
-namespace efl {
-namespace ipc {
+namespace efl::ipc {
 
     class Server {
        private:
-        static constexpr auto NUM_SERVERS = 1;
+        static constexpr auto NUM_SERVERS = 2;
         static constexpr auto EIFFEL_SERVICE_MAX_SESSIONS = 5;
 
         Server();
@@ -23,5 +22,4 @@ namespace ipc {
         static inline void Loop() { GetInstance().m_serverManager.LoopProcess(); }
     };
 
-}  // namespace ipc
-}  // namespace efl
+}  // namespace efl::ipc
