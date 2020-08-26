@@ -2,9 +2,9 @@
 
 #include <eiffel/sl.h>
 
+#include <map>
 #include <stratosphere.hpp>
 #include <string>
-#include <map>
 
 namespace efl::core {
 
@@ -23,13 +23,15 @@ namespace efl::core {
         std::map<std::string, SlPluginMeta> m_ActivePluginMetas;
         std::map<std::string, SlPluginSharedMemInfo> m_ActivePluginSharedMemInfos;
 
+        // TODO: need to clean everything when game is closed
+
        public:
         static inline void SetPluginMeta(SlPluginMeta& pluginMeta) {
             GetInstance().m_ActivePluginMetas[pluginMeta.name] = pluginMeta;
         }
 
-        static inline void SetPluginSharedMem(PluginName& name, SlPluginSharedMemInfo& sharedMemInfo) {
-            GetInstance().m_ActivePluginSharedMemInfos[name.data()] = sharedMemInfo;
+        static inline void SetPluginSharedMem(SlPluginName name, SlPluginSharedMemInfo& sharedMemInfo) {
+            GetInstance().m_ActivePluginSharedMemInfos[name] = sharedMemInfo;
         }
 
         static ams::Result GetPluginMeta(SlPluginMeta* out_pluginMeta, PluginName& name);

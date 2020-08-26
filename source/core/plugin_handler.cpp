@@ -22,11 +22,11 @@ namespace efl::core {
     ams::Result PluginHandler::GetPluginSharedMemInfo(SlPluginSharedMemInfo* out_sharedMemInfo, PluginName& name) {
         auto& activePluginSharedMemInfos = GetInstance().m_ActivePluginSharedMemInfos;
         auto foundPluginEntry = activePluginSharedMemInfos.find(name.data());
-        if (foundPluginEntry != activePluginSharedMemInfos.end()) {
-            *out_sharedMemInfo = foundPluginEntry->second;
-        } else {
+        if (foundPluginEntry == activePluginSharedMemInfos.end()) {
             return EFL_U_RESULT_SHARED_MEM_NOT_REGISTERED;
         }
+        *out_sharedMemInfo = foundPluginEntry->second;
+        activePluginSharedMemInfos.erase(foundPluginEntry);  // temp: keep it after proper cleanup impl
         return 0;
     }
 

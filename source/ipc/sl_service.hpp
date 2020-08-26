@@ -25,7 +25,7 @@ namespace efl::ipc {
         ams::Result Log(const ams::sf::InBuffer& module_name, efl::logger::LogLevel level,
                         const ams::sf::InBuffer& buf);
         ams::Result RegisterPlugin(SlPluginMeta meta);
-        ams::Result RegisterSharedMem(core::PluginName name, SlPluginSharedMemInfo sharedMemInfo);
+        ams::Result RegisterSharedMem(EiffelSlRegisterSharedMemIn in, ams::sf::CopyHandle handle);
 
        public:
         DEFINE_SERVICE_DISPATCH_TABLE{
